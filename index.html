@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VoteSecure | Online Voting System</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+<!-- NAVBAR -->
+<!-- ===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        VoteSecure
+    </div>
+
+    <div class="nav-buttons">
+
+        <button class="nav-btn"
+                onclick="showView('home')">
+            Home
+        </button>
+
+        <button class="nav-btn"
+                onclick="openLogin()">
+            Voter Login
+        </button>
+
+        <button class="nav-btn"
+                onclick="openAdminLogin()">
+            Admin
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ===================================================== -->
+<!-- HOME -->
+<!-- ===================================================== -->
+
+<section id="home" class="view active">
+
+<div class="container">
+
+    <div class="hero">
+
+        <div class="secure-badge">
+            SECURE • SIMPLE • SMART
+        </div>
+
+        <h1>
+            Welcome to <span>VoteSecure</span>
+        </h1>
+
+        <p>
+            A simple online voting system where voters can securely
+            log in, view their dashboard, cast one vote and check
+            election results.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="btn btn-primary"
+                    onclick="openLogin()">
+                Voter Login
+            </button>
+
+            <button class="btn btn-secondary"
+                    onclick="openAdminLogin()">
+                Admin Panel
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card-grid">
+
+        <div class="card">
+
+            <h3>🔐 Secure Login</h3>
+
+            <p>
+                Voter login uses Voter ID, name, email,
+                mobile number and OTP.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>☑️ One Voter • One Vote</h3>
+
+            <p>
+                The same voter cannot vote more than once
+                in this demo.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>📊 Admin Monitoring</h3>
+
+            <p>
+                Admin can monitor voters, completed votes,
+                remaining capacity and candidate votes.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>⚙️ Admin Control</h3>
+
+            <p>
+                Admin can control voting time and maximum
+                number of voters.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="home-info-section">
+
+        <div class="home-info-header">
+
+            <h2>
+                Important Election Information
+            </h2>
+
+            <p>
+                Review these points before starting the voting process.
+            </p>
+
+        </div>
+
+
+        <div class="card-grid">
+
+            <div class="card">
+
+                <h3>🗳️ Election Details</h3>
+
+                <p>
+                    <strong>Election:</strong>
+                    Student President Election 2026
+                </p>
+
+                <p>
+                    <strong>Vote:</strong>
+                    One vote per registered voter
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>👤 Voter Eligibility</h3>
+
+                <p>
+                    Use your valid Voter ID, registered email
+                    and mobile number.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>📜 Voting Rules</h3>
+
+                <p>
+                    Select exactly one candidate.
+                    After confirmation, your vote cannot be changed.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🛡️ Security</h3>
+
+                <p>
+                    OTP verification is required before
+                    entering the voting dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>⚙️ Voting Process</h3>
+
+                <p>
+                    Login → OTP → Dashboard → Ready to Vote
+                    → Candidate → Confirm.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>⚠️ Important Notice</h3>
+
+                <p>
+                    Do not share your OTP or voter details
+                    with anyone.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- VOTER DASHBOARD -->
+<!-- ===================================================== -->
+
+<section id="dashboard" class="view">
+
+<div class="container page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Voter Dashboard</h1>
+
+            <p>
+                Welcome,
+                <strong id="dashboardName"></strong>.
+                Review your details before voting.
+            </p>
+
+        </div>
+
+        <div class="page-header-right">
+
+            <button class="btn btn-secondary"
+                    onclick="showView('home')">
+                ← Return Home
+            </button>
+
+            <button class="btn btn-danger"
+                    onclick="logoutVoter()">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Voter Details</h2>
+
+        <div class="voter-profile">
+
+            <div class="profile-item">
+
+                <strong>Voter ID</strong>
+
+                <span id="profileVoterId"></span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Name</strong>
+
+                <span id="profileName"></span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Email</strong>
+
+                <span id="profileEmail"></span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Mobile</strong>
+
+                <span id="profileMobile"></span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Voting Status</strong>
+
+                <span id="profileStatus"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="readyBox"
+         class="ready-box">
+
+        <h2>Ready to Vote?</h2>
+
+        <p>
+            Click the button below to enter the ballot.
+        </p>
+
+        <button class="btn btn-primary"
+                onclick="readyToVote()">
+            Ready to Vote
+        </button>
+
+    </div>
+
+
+    <div id="completedBox"
+         class="completed-box"
+         style="display:none;">
+
+        <h2>✓ Voting Completed</h2>
+
+        <p>
+            Your vote has already been recorded.
+            You cannot vote again using the same voter details.
+        </p>
+
+        <button class="btn btn-secondary"
+                onclick="showView('home')">
+            Return Home
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- ELECTION -->
+<!-- ===================================================== -->
+
+<section id="elections" class="view">
+
+<div class="container page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Election Information</h1>
+
+            <p>
+                Select exactly one candidate.
+            </p>
+
+        </div>
+
+        <div class="page-header-right">
+
+            <button class="btn btn-secondary"
+                    onclick="showView('home')">
+                ← Return Home
+            </button>
+
+            <button class="btn btn-secondary"
+                    onclick="showView('dashboard')">
+                ← Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="election-card">
+
+        <span id="electionStatus"
+              class="election-status">
+            ● Voting Active
+        </span>
+
+        <h2 style="margin-top:15px;">
+            Student President Election 2026
+        </h2>
+
+        <p>
+            Choose exactly one candidate.
+            Once confirmed, the vote cannot be changed.
+        </p>
+
+        <p style="margin-top:10px;">
+
+            <strong>Voter:</strong>
+
+            <span id="electionVoterName"></span>
+
+        </p>
+
+    </div>
+
+
+    <div class="candidate-grid">
+
+
+        <div class="candidate"
+             onclick="selectCandidate(0)"
+             id="candidate0">
+
+            <input type="radio"
+                   name="candidate"
+                   id="radio0">
+
+            <div class="candidate-name">
+                Candidate A
+            </div>
+
+            <div class="candidate-party">
+                Student Development
+            </div>
+
+        </div>
+
+
+        <div class="candidate"
+             onclick="selectCandidate(1)"
+             id="candidate1">
+
+            <input type="radio"
+                   name="candidate"
+                   id="radio1">
+
+            <div class="candidate-name">
+                Candidate B
+            </div>
+
+            <div class="candidate-party">
+                Education & Innovation
+            </div>
+
+        </div>
+
+
+        <div class="candidate"
+             onclick="selectCandidate(2)"
+             id="candidate2">
+
+            <input type="radio"
+                   name="candidate"
+                   id="radio2">
+
+            <div class="candidate-name">
+                Candidate C
+            </div>
+
+            <div class="candidate-party">
+                Student Welfare
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="confirmPanel"
+         class="confirm-panel">
+
+        <h2>Confirm Your Vote</h2>
+
+        <p>
+            Selected candidate:
+            <strong id="selectedCandidateText"></strong>
+        </p>
+
+        <button class="btn btn-primary"
+                onclick="castVote()">
+            Confirm Vote
+        </button>
+
+        <button class="btn btn-secondary"
+                onclick="cancelSelection()">
+            Change Selection
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- RESULTS -->
+<!-- ===================================================== -->
+
+<section id="results" class="view">
+
+<div class="container page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Election Results</h1>
+
+            <p>
+                Current election vote count.
+            </p>
+
+        </div>
+
+        <button class="btn btn-secondary"
+                onclick="showView('home')">
+            ← Return Home
+        </button>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h2>Live Results</h2>
+
+
+        <div class="result-row">
+
+            <div class="result-top">
+
+                <span>Candidate A</span>
+
+                <span id="resultA">
+                    0 votes
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div id="barA"
+                     class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <div class="result-top">
+
+                <span>Candidate B</span>
+
+                <span id="resultB">
+                    0 votes
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div id="barB"
+                     class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <div class="result-top">
+
+                <span>Candidate C</span>
+
+                <span id="resultC">
+                    0 votes
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div id="barC"
+                     class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- ADMIN -->
+<!-- ===================================================== -->
+
+<section id="admin" class="view">
+
+<div class="container page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Admin Dashboard</h1>
+
+            <p>
+                Control and monitor the voting process.
+            </p>
+
+        </div>
+
+        <div class="page-header-right">
+
+            <button class="btn btn-secondary"
+                    onclick="showView('home')">
+                ← Return Home
+            </button>
+
+            <button class="btn btn-danger"
+                    onclick="logoutAdmin()">
+                Admin Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN STATISTICS -->
+
+    <div class="admin-grid">
+
+
+        <div class="admin-card">
+
+            <h3>Registered Voters</h3>
+
+            <div class="admin-number"
+                 id="adminRegistered">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>Voters Completed</h3>
+
+            <div class="admin-number"
+                 id="adminVoted">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>Remaining Voters</h3>
+
+            <div class="admin-number"
+                 id="adminRemaining">
+                50
+            </div>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>Total Votes</h3>
+
+            <div class="admin-number"
+                 id="adminTotalVotes">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ELECTION CONTROL -->
+
+    <div class="admin-card"
+         style="margin-top:25px;">
+
+        <h2>⚙️ Election Control</h2>
+
+        <p>
+            Admin can control the election schedule,
+            maximum voters and starting vote counts.
+        </p>
+
+
+        <div class="input-group">
+
+            <label>
+                Election Start Date & Time
+            </label>
+
+            <input type="datetime-local"
+                   id="adminStartTime">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Election End Date & Time
+            </label>
+
+            <input type="datetime-local"
+                   id="adminEndTime">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Maximum Number of Voters Allowed
+            </label>
+
+            <input type="number"
+                   id="adminMaxVoters"
+                   min="1"
+                   placeholder="Example: 50">
+
+        </div>
+
+
+        <h3 style="margin-top:25px;">
+            Default Vote Count
+        </h3>
+
+
+        <div class="input-group">
+
+            <label>
+                Candidate A Default Votes
+            </label>
+
+            <input type="number"
+                   id="defaultVoteA"
+                   min="0">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Candidate B Default Votes
+            </label>
+
+            <input type="number"
+                   id="defaultVoteB"
+                   min="0">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Candidate C Default Votes
+            </label>
+
+            <input type="number"
+                   id="defaultVoteC"
+                   min="0">
+
+        </div>
+
+
+        <div style="margin-top:20px;">
+
+            <button class="btn btn-primary"
+                    onclick="saveElectionSettings()">
+                💾 Save Election Settings
+            </button>
+
+
+            <button class="btn btn-primary"
+                    onclick="startVotingNow()">
+                ▶ Start Voting Now
+            </button>
+
+
+            <button class="btn btn-danger"
+                    onclick="stopVoting()">
+                ⛔ Stop Voting
+            </button>
+
+        </div>
+
+
+        <div id="adminElectionStatus"
+             class="status-box">
+
+            Election status: Loading...
+
+        </div>
+
+    </div>
+
+
+    <!-- LIVE STATUS -->
+
+    <div class="admin-header"
+         style="margin-top:25px;">
+
+        <h2>📊 Voting Progress</h2>
+
+        <p id="adminProgressText">
+            0% voters completed voting.
+        </p>
+
+        <div class="progress"
+             style="margin-top:15px;">
+
+            <div id="adminProgress"
+                 class="progress-bar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- VOTE TABLE -->
+
+    <div class="admin-card">
+
+        <h2>Candidate Vote Count</h2>
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Candidate</th>
+
+                    <th>Votes</th>
+
+                    <th>Percentage</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td>Candidate A</td>
+
+                    <td id="adminA">0</td>
+
+                    <td id="adminAPercent">0%</td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Candidate B</td>
+
+                    <td id="adminB">0</td>
+
+                    <td id="adminBPercent">0%</td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Candidate C</td>
+
+                    <td id="adminC">0</td>
+
+                    <td id="adminCPercent">0%</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="admin-card"
+         style="margin-top:20px;">
+
+        <h2>Voting Activity</h2>
+
+        <p id="adminActivity">
+            No voting activity yet.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- VOTER LOGIN MODAL -->
+<!-- ===================================================== -->
+
+<div id="loginModal"
+     class="modal">
+
+<div class="modal-box">
+
+    <h2>Voter Login</h2>
+
+    <p>
+        Enter your details and generate OTP.
+    </p>
+
+
+    <div class="input-group">
+
+        <label>Voter ID</label>
+
+        <input type="text"
+               id="loginVoterId"
+               placeholder="Enter Voter ID"
+               maxlength="20">
+
+    </div>
+
+
+    <div class="input-group">
+
+        <label>Full Name</label>
+
+        <input type="text"
+               id="loginName"
+               placeholder="Enter full name">
+
+    </div>
+
+
+    <div class="input-group">
+
+        <label>Email</label>
+
+        <input type="email"
+               id="loginEmail"
+               placeholder="Enter email">
+
+    </div>
+
+
+    <div class="input-group">
+
+        <label>Mobile Number</label>
+
+        <input type="tel"
+               id="loginMobile"
+               placeholder="10 digit mobile number"
+               maxlength="10">
+
+    </div>
+
+
+    <button class="btn btn-secondary"
+            style="width:100%;"
+            onclick="sendOTP()">
+
+        Send / Resend OTP
+
+    </button>
+
+
+    <div id="otpBox"
+         class="otp-box">
+
+        <div class="input-group">
+
+            <label>Enter OTP</label>
+
+            <input type="text"
+                   id="loginOTP"
+                   placeholder="6 digit OTP"
+                   maxlength="6">
+
+        </div>
+
+        <p id="otpMessage"
+           class="demo-note">
+        </p>
+
+    </div>
+
+
+    <div class="modal-buttons">
+
+        <button class="btn btn-primary"
+                onclick="loginVoter()">
+            Login
+        </button>
+
+        <button class="btn btn-secondary"
+                onclick="closeLogin()">
+            Cancel
+        </button>
+
+    </div>
+
+
+    <p class="demo-note">
+        Demo OTP is displayed on screen.
+    </p>
+
+</div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- ADMIN LOGIN -->
+<!-- ===================================================== -->
+
+<div id="adminModal"
+     class="modal">
+
+<div class="modal-box">
+
+    <h2>Admin Login</h2>
+
+    <p>
+        Login to control the election.
+    </p>
+
+
+    <div class="input-group">
+
+        <label>Username</label>
+
+        <input type="text"
+               id="adminUsername"
+               placeholder="Enter username">
+
+    </div>
+
+
+    <div class="input-group">
+
+        <label>Password</label>
+
+        <input type="password"
+               id="adminPassword"
+               placeholder="Enter password">
+
+    </div>
+
+
+    <div class="modal-buttons">
+
+        <button class="btn btn-primary"
+                onclick="loginAdmin()">
+            Login
+        </button>
+
+        <button class="btn btn-secondary"
+                onclick="closeAdminLogin()">
+            Cancel
+        </button>
+
+    </div>
+
+
+    <p class="demo-note">
+
+        Demo username: admin<br>
+        Demo password: admin123
+
+    </p>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast"
+     class="toast">
+</div>
+
+
+<footer>
+
+VoteSecure © 2026 | Online Voting System Demo
+
+</footer>
+
+
+<!-- JavaScript -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
